@@ -6,7 +6,7 @@
 # Author:        hyb
 # Description:   nginx 日志切割、打包、删除过期压缩包脚本
 # Notes:         配合 crontab 计划任务，每天零时对日志打包
-#                0 0 * * * /bin/bash [PATH]/nginx_log_cutting.sh /var/www/project >> /dev/null
+#                0 0 * * * /bin/bash [PATH]/nginx_log_cutting.sh /var/www/project &> /dev/null
 # --------------------------------------------------------------------------------------------
 
 # nginx 进程 id,通常是 /var/run/nginx.pid
