@@ -76,4 +76,4 @@ if [ $error_expire -gt 0 ];then
     ls -rtd $error_name | head -n $error_expire | xargs rm -f;
 fi
 
-echo "success, nginx log cutting!";exit 0;
+echo "success, nginx log cut!";exit 0;
