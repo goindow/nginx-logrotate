@@ -65,8 +65,8 @@ kill -USR1 `cat $nginx_pid`;
 tar -zcf access-${yesterday}.tar.gz access-${yesterday}.log --remove-file
 tar -zcf error-${yesterday}.tar.gz error-${yesterday}.log --remove-file
 
-access_expire=$(($(ls $access_name | wc -l) - $log_expire));
-error_expire=$(($(ls $error_name | wc -l) - $log_expire));
+access_expire=$(($(ls $access_name | wc -l 2> /dev/null) - $log_expire));
+error_expire=$(($(ls $error_name | wc -l 2> /dev/null) - $log_expire));
 
 # 压缩包数量维护
 if [ $access_expire -gt 0 ];then
