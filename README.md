@@ -1,10 +1,11 @@
-# nginx_log_cutting
+# nginx_logrotate
 nginx 日志切割、打包、压缩包维护 shell
 
 ## Usage
+- 路径依据各自服务器情况替换
 ```bash
-0 0 * * * /bin/bash /data0/shell/nginx_log_cutting.sh /data0/logs/zje-backend/ &> /dev/null
+0 0 * * * /bin/bash /data/sh/nginx_logrotate.sh /data/logs/nginx/$your_website_log_dir/ &> /dev/null
 ```
 
 ## 相关链接
-[docker 版本](https://github.com/goindow/docker_nginx_log_cutting)
+[docker 版本](https://github.com/goindow/docker-nginx-logrotate)
