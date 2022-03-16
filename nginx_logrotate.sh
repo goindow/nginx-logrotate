@@ -1,24 +1,22 @@
 #!/bin/bash
 
-# nginx 进程 id,通常是 /var/run/nginx.pid
-nginx_pid="/var/run/nginx.pid";
-# 项目日志目录
-log_dir="";
-# access文件名
+# .log 日志文件名
 access_log='access.log';
-# error文件名
 error_log="error.log";
-# 昨天日期
-yesterday=$(date -d 'yesterday' +%Y%m%d);    # 生产
-#yesterday=$(date -d 'today' +%Y%m%d%H%M);    # 测试
-# access压缩包正则
+
+# .tar.gz 日志压缩包名
 access_name="access-*.tar.gz";
-# error压缩包正则
 error_name="error-*.tar.gz";
+
 # 压缩包过期时间
 log_expire=14;
 
-# 检测 nginx_pid 文件是否存在
+# 打包时间
+yesterday=$(date -d 'yesterday' +%Y%m%d);    # 生产
+#yesterday=$(date -d 'today' +%Y%m%d%H%M);    # 测试
+
+# 检测 nginx_pid 文件是否存在，通常是 /var/run/nginx.pid
+nginx_pid="/var/run/nginx.pid";
 if [ ! -e $nginx_pid ];then
     echo "failed, $nginx_pid not exists!";exit 1;
 fi
@@ -28,6 +26,7 @@ if [ -z $1 ];then
     echo "failed, missing parameter log_dir! command like, ./nginx_log_cutting.sh /var/log/project/";exit 2;
 fi
 
+# 项目日志目录
 log_dir=$1;
 # 检测日志目录是否存在
 if [ ! -d $log_dir ];then
@@ -40,7 +39,6 @@ cd $log_dir;
 if [ ! -e $access_log ];then
     echo "failed, $access_log not exists!";exit 4;
 fi
-
 if [ ! -e $error_log ];then
     echo "failed, $error_log not exists!";exit 5;
 fi
@@ -67,4 +65,4 @@ if [ $error_expire -gt 0 ];then
     ls -rtd $error_name | head -n $error_expire | xargs rm -f;
 fi
 
-echo "success, nginx log cut!";exit 0;
+echo "success" && exit 0
